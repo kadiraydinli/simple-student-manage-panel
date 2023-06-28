@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import { STORAGE_KEY } from "@/types";
 
 const useAuth = () => {
-    const result = localStorage.getItem(STORAGE_KEY);
-    const [isLogin, setIsLogin] = useState<boolean>(result === "true");
+    const pathname = usePathname();
+    const [isLogin, setIsLogin] = useState<boolean | null>(null);
 
     const onLogin = () => {
         localStorage.setItem(STORAGE_KEY, "true");
@@ -17,6 +18,16 @@ const useAuth = () => {
         setIsLogin(false);
         location.replace("/login");
     };
+
+    useEffect(() => {
+        const result = localStorage.getItem(STORAGE_KEY);
+
+        if (result === "true") {
+            setIsLogin(true);
+        } else if (pathname === "/") {
+            location.replace("/login");
+        }
+    }, [pathname]);
 
     return {
         isLogin,
