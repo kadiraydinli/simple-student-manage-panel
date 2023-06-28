@@ -1,13 +1,17 @@
 "use client";
 
+import Box from "@/components/Box";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import useAuth from "@/hooks/useAuth";
 
 const LoginCard = () => {
+	const { onLogin } = useAuth();
+
 	return (
-		<div className="bg-white rounded-lg pt-[44px] px-8 pb-10 drop-shadow flex flex-col justify-center items-center">
+		<Box>
 			<div className="flex flex-row">
-				<div className="divide-x-2 bg-red-500"></div>
+				<div className="border-l-[6px] border-[--secondary] mr-1.5"></div>
 				<h1 className="font-bold text-3xl">MANAGE COURSES</h1>
 			</div>
 
@@ -24,9 +28,12 @@ const LoginCard = () => {
 					placeholder="Enter your password"
 					labelTitle="Password"
 					type="password"
+					autoComplete="on"
 				/>
 
-				<Button className="mt-8">Tıkla</Button>
+				<Button className="mt-8" onClick={onLogin}>
+					Tıkla
+				</Button>
 			</form>
 
 			<div className="mt-7 font-normal text-sm text-[--text]">
@@ -35,7 +42,7 @@ const LoginCard = () => {
 					Reset Password
 				</span>
 			</div>
-		</div>
+		</Box>
 	);
 };
 
