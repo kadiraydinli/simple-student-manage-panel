@@ -1,7 +1,9 @@
-import "./globals.css";
 import { Montserrat } from "next/font/google";
 
-const inter = Montserrat({ subsets: ["latin"] });
+import RootContent from "./components/RootContent";
+import "./globals.css";
+
+const font = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
 	title: "Manage Students",
@@ -15,7 +17,9 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={font.className}>
+				<RootContent>{children}</RootContent>
+			</body>
 		</html>
 	);
 }
