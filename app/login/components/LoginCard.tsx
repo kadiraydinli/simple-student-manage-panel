@@ -23,11 +23,11 @@ const LoginCard = () => {
 			</div>
 
 			<form action="" className="w-full">
-				<Input placeholder="Enter your email" labelTitle="Email" />
+				<Input type="email" placeholder="Enter your email" labelTitle="Email" />
 				<Input
+					type="password"
 					placeholder="Enter your password"
 					labelTitle="Password"
-					type="password"
 					autoComplete="on"
 				/>
 
