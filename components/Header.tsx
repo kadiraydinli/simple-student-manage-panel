@@ -19,7 +19,7 @@ const Header = () => {
 	const onNotifications = () => {};
 
 	return (
-		<div className="h-fit py-5 px-8 flex flex-row items-center justify-between">
+		<div className="h-fit py-5 px-8 flex flex-row items-center justify-between bg-white">
 			<button
 				className="text-[--icon] hover:text-black cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
 				onClick={onBack}
