@@ -6,3 +6,14 @@ export type RouteType = {
     active: boolean;
     href: string;
 };
+
+export type CardType = {
+    type: "student" | "course" | "payment" | "user";
+    icon: (props: React.SVGAttributes<SVGElement>) => JSX.Element;
+    onClick?: () => void;
+    label: string;
+    labelStyle?: string;
+    value: number;
+    iconColor: string;
+    style: string;
+};
