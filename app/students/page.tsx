@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 
 import Header from "@/components/Header";
-
-import SubHeader from "./components/SubHeader";
+import PageHeader from "@/components/PageHeader";
 
 const Students = () => {
 	const [searchValue, setSearchValue] = useState<string>("");
@@ -18,7 +17,7 @@ const Students = () => {
 	return (
 		<div className="w-full h-full bg-[--background]">
 			<Header />
-			<SubHeader
+			<PageHeader
 				title="Students List"
 				buttonProps={{ children: "ADD NEW STUDENT", onClick: onAddStudent }}
 				searchInputProps={{ value: searchValue, onChange: onChangeSearch }}
