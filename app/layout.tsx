@@ -6,7 +6,7 @@ import "./globals.css";
 const font = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
-	title: "Manage Students",
+	title: "MANAGE COURSES",
 	description: "Simple student manage panel",
 };
 
