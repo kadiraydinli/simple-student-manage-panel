@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import Icon from "@/assets/icons";
 import { UserType } from "@/types";
@@ -18,9 +19,12 @@ const Item: React.FC<ItemProps> = ({
 	domain,
 	company,
 }) => {
+	const router = useRouter();
 	const { deleteStudent } = useStudents();
 
-	const onEdit = () => {};
+	const onEdit = () => {
+		router.push(`/students/edit/${id}`);
+	};
 
 	const onDelete = async () => {
 		if (
