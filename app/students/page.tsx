@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
@@ -17,9 +18,12 @@ interface StudentsProps {
 }
 
 const Students: React.FC<StudentsProps> = ({ searchParams }) => {
+	const router = useRouter();
 	const { students, getStudents, total } = useStudents();
 
-	const onAddStudent = () => {};
+	const onAddStudent = () => {
+		router.push("/students/add");
+	};
 
 	useEffect(() => {
 		getStudents({
