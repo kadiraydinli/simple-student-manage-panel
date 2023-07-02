@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["picsum.photos"],
+		domains: ["picsum.photos", "robohash.org"],
 	},
 	webpack(config) {
 		// Grab the existing rule that handles SVG imports
