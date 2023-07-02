@@ -71,7 +71,8 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 							src="https://picsum.photos/2000"
 							className="object-cover"
 							fill
-							priority={false}
+							priority
+							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 						/>
 					</div>
 					<div className="font-bold text-base text-black mt-4">
