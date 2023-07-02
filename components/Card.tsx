@@ -49,7 +49,7 @@ const Card: React.FC<CardProps> = ({
 			<p className={"text-black font-bold text-3xl text-right"}>
 				{numberValue}
 				{type === "payment" && (
-					<p className="text-black font-bold text-lg inline-block">₺</p>
+					<span className="text-black font-bold text-lg inline-block">₺</span>
 				)}
 			</p>
 		</div>
