@@ -56,10 +56,10 @@ export type BankType = {
 };
 
 export type CompanyType = {
-    address: AddressType;
-    department: string;
+    address?: AddressType;
+    department?: string;
     name: string;
-    title: string;
+    title?: string;
 };
 
 export type UserType = {
