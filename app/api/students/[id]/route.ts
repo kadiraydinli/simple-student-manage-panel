@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { UserType } from "@/types";
+
 const API_URL = process.env.API_URL;
 
 export async function GET(
@@ -16,9 +18,15 @@ export async function GET(
 // TODO: Add validation for params
 
 export async function PUT(request: Request) {
-    // TODO: Send data
-    const res = await request.json();
-    return NextResponse.json({ res });
+    const data: UserType = await request.json();
+    const res = await fetch(`${API_URL}/users/${data.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    })
+
+    const resultData = await res.json();
+    return NextResponse.json(resultData);
 };
 
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
