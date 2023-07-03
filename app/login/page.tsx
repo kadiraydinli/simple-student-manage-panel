@@ -18,7 +18,7 @@ const Login = () => {
 	}, [isLogin, router]);
 
 	return (
-		<div className="w-screen h-screen flex justify-center items-center bg-gradient-to-r from-[--primary] to-[--secondary]">
+		<div className="h-screen flex justify-center items-center bg-gradient-to-r from-[--primary] to-[--secondary]">
 			<LoginCard />
 		</div>
 	);
