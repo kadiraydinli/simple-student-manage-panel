@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import RootContent from "./components/RootContent";
 import "./globals.css";
 
-const font = Montserrat({ subsets: ["latin"] });
+const font = Montserrat({ subsets: ["latin"], preload: true });
 
 export const metadata = {
 	title: "MANAGE COURSES",
