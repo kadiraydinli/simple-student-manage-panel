@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -15,11 +15,8 @@ interface AddStudentProps {}
 const AddStudent: React.FC<AddStudentProps> = ({}) => {
 	const router = useRouter();
 	const emptyUser = Object.create(null) as UserType;
-	const [student, setStudent] = useState<UserType>(emptyUser);
 
-	console.log(student);
-
-	const onAddStudent = async () => {
+	const onAddStudent = async (student: UserType) => {
 		const res = await fetch("/api/students/add", {
 			method: "POST",
 			body: JSON.stringify(student),
@@ -35,12 +32,9 @@ const AddStudent: React.FC<AddStudentProps> = ({}) => {
 	return (
 		<div className="h-full bg-[--background] flex flex-col">
 			<Header />
-			<PageHeader
-				title="Add Student"
-				buttonProps={{ children: "SAVE", onClick: onAddStudent }}
-			/>
+			<PageHeader title="Add Student" />
 			<div className="flex flex-1 py-5 px-8 overflow-hidden overflow-y-hidden justify-center">
-				<Form student={student} onChangeStudent={setStudent} />
+				<Form student={emptyUser} onSubmit={onAddStudent} />
 			</div>
 		</div>
 	);

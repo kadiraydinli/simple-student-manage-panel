@@ -1,19 +1,30 @@
+import { ErrorMessage, Field } from "formik";
 import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	labelTitle?: string;
+	required?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-	({ labelTitle, className, type, disabled, ...props }, ref) => {
+	(
+		{ labelTitle, required, name, className, type, disabled, ...props },
+		ref
+	) => {
 		return (
 			<div className="flex w-full flex-col">
-				<label className="mb-3 mt-5 font-medium text-sm text-[--text]">
+				<label
+					htmlFor={name}
+					className="mb-3 mt-5 font-medium text-sm text-[--text]"
+				>
 					{labelTitle}
+
+					{required && <span className="text-red-500">&nbsp;*</span>}
 				</label>
-				<input
+				<Field
 					type={type}
+					name={name}
 					className={twMerge(
 						`
                         flex
@@ -36,6 +47,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 					disabled={disabled}
 					ref={ref}
 					{...props}
+				/>
+				<ErrorMessage
+					name={name}
+					component="div"
+					className="text-red-500 text-xs font-medium mt-1"
 				/>
 			</div>
 		);

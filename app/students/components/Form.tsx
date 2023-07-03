@@ -1,73 +1,124 @@
 "use client";
 
+import { Formik, Form as FormikForm } from "formik";
+import { toast } from "react-hot-toast";
+import * as Yup from "yup";
+
 import Input from "@/components/Input";
 import { UserType } from "@/types";
+import Button from "@/components/Button";
 
 interface FormProps {
 	student: UserType | null;
-	onChangeStudent: (student: UserType) => void;
+	onSubmit: (student: UserType) => void;
 }
 
-const Form: React.FC<FormProps> = ({ student, onChangeStudent }) => {
-	const onChange = (key: string, value: string) => {
-		if (student) {
-			onChangeStudent({ ...student, [key]: value });
-		}
-	};
+const Form: React.FC<FormProps> = ({ student, onSubmit }) => {
+	const validationSchema = Yup.object({
+		firstName: Yup.string()
+			.max(15, "Must be 15 characters or less")
+			.required("Required"),
+		lastName: Yup.string()
+			.max(20, "Must be 20 characters or less")
+			.required("Required"),
+		email: Yup.string().email("Invalid email address").required("Required"),
+		phone: Yup.number().required("Required"),
+		domain: Yup.string().url().required("Required"),
+		companyName: Yup.string()
+			.max(15, "Must be 15 characters or less")
+			.required("Required"),
+	});
 
-	const onChangeCompanyName = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (student) {
-			onChangeStudent({ ...student, company: { name: e.target.value } });
+	const handleSubmit = async (
+		values: Pick<
+			UserType,
+			"firstName" | "lastName" | "email" | "phone" | "domain"
+		> & { companyName: string }
+	) => {
+		try {
+			if (student) {
+				onSubmit({
+					...student,
+					firstName: values.firstName,
+					lastName: values.lastName,
+					email: values.email,
+					phone: values.phone,
+					domain: values.domain,
+					company: { name: values.companyName },
+				});
+			}
+		} catch {
+			toast.error("Something went wrong!");
 		}
 	};
 
 	return (
-		<form className="w-full">
-			<div className="flex flex-row gap-2">
-				<Input
-					labelTitle="First Name"
-					placeholder="First Name"
-					type="text"
-					value={student?.firstName || ""}
-					onChange={(e) => onChange("firstName", e.target.value)}
-				/>
-				<Input
-					labelTitle="Last Name"
-					placeholder="Last Name"
-					type="text"
-					value={student?.lastName || ""}
-					onChange={(e) => onChange("lastName", e.target.value)}
-				/>
-			</div>
-			<Input
-				labelTitle="Email"
-				placeholder="Email"
-				type="email"
-				value={student?.email || ""}
-				onChange={(e) => onChange("email", e.target.value)}
-			/>
-			<Input
-				labelTitle="Phone"
-				placeholder="+90 000 000 00 00"
-				type="tel"
-				value={student?.phone || ""}
-				onChange={(e) => onChange("phone", e.target.value)}
-			/>
-			<Input
-				labelTitle="Website"
-				placeholder="https://example.com"
-				type="url"
-				value={student?.domain || ""}
-				onChange={(e) => onChange("domain", e.target.value)}
-			/>
-			<Input
-				labelTitle="Company Name"
-				placeholder="Company Name"
-				type="text"
-				value={student?.company?.name || ""}
-				onChange={onChangeCompanyName}
-			/>
-		</form>
+		<Formik
+			initialValues={{
+				firstName: student?.firstName || "",
+				lastName: student?.lastName || "",
+				email: student?.email || "",
+				phone: student?.phone || "",
+				domain: student?.domain || "",
+				companyName: student?.company?.name || "",
+			}}
+			validationSchema={validationSchema}
+			onSubmit={handleSubmit}
+		>
+			{({ isSubmitting }) => (
+				<FormikForm className="w-full">
+					<div className="flex flex-row gap-2">
+						<Input
+							name="firstName"
+							labelTitle="First Name"
+							placeholder="First Name"
+							required
+							type="text"
+						/>
+						<Input
+							name="lastName"
+							labelTitle="Last Name"
+							placeholder="Last Name"
+							required
+							type="text"
+						/>
+					</div>
+					<Input
+						name="email"
+						labelTitle="Email"
+						placeholder="Email"
+						required
+						type="email"
+					/>
+					<Input
+						name="phone"
+						labelTitle="Phone"
+						placeholder="+90 000 000 00 00"
+						required
+						type="tel"
+					/>
+					<Input
+						name="domain"
+						labelTitle="Website"
+						placeholder="https://example.com"
+						required
+						type="url"
+					/>
+					<Input
+						name="companyName"
+						labelTitle="Company Name"
+						placeholder="Company Name"
+						required
+						type="text"
+					/>
+					<div className="flex w-full justify-center mt-4">
+						<Button type="submit" className="w-1/2">
+							{isSubmitting ? "Loading..." : "SAVE"}
+						</Button>
+					</div>
+				</FormikForm>
+			)}
+		</Formik>
 	);
 };
 

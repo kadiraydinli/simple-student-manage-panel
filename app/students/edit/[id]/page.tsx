@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -9,6 +9,7 @@ import PageHeader from "@/components/PageHeader";
 import { UserType } from "@/types";
 
 import Form from "../../components/Form";
+import LoadingState from "@/components/LoadingState";
 
 interface EditStudentProps {
 	params: {
@@ -18,45 +19,59 @@ interface EditStudentProps {
 
 const EditStudent: React.FC<EditStudentProps> = ({ params }) => {
 	const router = useRouter();
+	const [loading, setLoading] = useState<boolean>(true);
 	const [student, setStudent] = useState<UserType | null>(null);
 
 	useEffect(() => {
 		const getData = async () => {
 			if (params?.id) {
+				setLoading(true);
 				const res = await fetch(`/api/students/${params.id}`, {
 					method: "GET",
 				});
 				const result: UserType = await res.json();
 
 				setStudent(result);
+				setLoading(false);
 			}
 		};
 
 		getData();
 	}, [params]);
 
-	const onEditStudent = async () => {
-		const res = await fetch(`/api/students/${params.id}`, {
-			method: "PUT",
-			body: JSON.stringify(student),
-		});
-		const result: UserType = await res.json();
+	const onEditStudent = useCallback(
+		async (newStudent: UserType) => {
+			const res = await fetch(`/api/students/${params.id}`, {
+				method: "PUT",
+				body: JSON.stringify(newStudent),
+			});
+			console.log(newStudent);
+			const result: UserType = await res.json();
 
-		if (result) {
-			toast.success("Edited!");
-			router.push("/students");
+			if (result) {
+				toast.success("Edited!");
+				router.push("/students");
+			}
+		},
+		[params.id, router]
+	);
+
+	const content = useMemo(() => {
+		if (loading) {
+			return <LoadingState />;
 		}
-	};
+
+		if (student) {
+			return <Form student={student} onSubmit={onEditStudent} />;
+		}
+	}, [loading, onEditStudent, student]);
 
 	return (
 		<div className="h-full bg-[--background] flex flex-col">
 			<Header />
-			<PageHeader
-				title="Edit Student"
-				buttonProps={{ children: "SAVE", onClick: onEditStudent }}
-			/>
+			<PageHeader title="Edit Student" />
 			<div className="flex flex-1 py-5 px-8 overflow-hidden overflow-y-hidden justify-center">
-				<Form student={student} onChangeStudent={setStudent} />
+				{content}
 			</div>
 		</div>
 	);
