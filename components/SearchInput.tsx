@@ -37,7 +37,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
 			/>
-			<Icon.Search color={"var(--icon)"} />
+			{value === "" && <Icon.Search color={"var(--icon)"} />}
 		</div>
 	);
 };
