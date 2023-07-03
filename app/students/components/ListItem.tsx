@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 import Icon from "@/assets/icons";
 import { UserType } from "@/types";
@@ -35,7 +36,7 @@ const Item: React.FC<ItemProps> = ({
 			const result = await deleteStudent(id);
 
 			if (result) {
-				alert("Deleted!");
+				toast.success("Deleted!");
 			}
 		}
 	};
