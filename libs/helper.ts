@@ -7,3 +7,11 @@ export const currencyFormat = (amount: number) => {
 
     return formattedAmount.replace('₺', '');
 };
+
+export const addHTTPToWebsite = (url: string) => {
+    if (!url.startsWith("http://") || !url.startsWith("https://")) {
+        return `http://${url}`
+    }
+
+    return url;
+};

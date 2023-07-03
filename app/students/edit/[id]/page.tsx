@@ -45,7 +45,6 @@ const EditStudent: React.FC<EditStudentProps> = ({ params }) => {
 				method: "PUT",
 				body: JSON.stringify(newStudent),
 			});
-			console.log(newStudent);
 			const result: UserType = await res.json();
 
 			if (result) {

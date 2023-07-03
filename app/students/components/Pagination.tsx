@@ -60,7 +60,7 @@ const Pagination: React.FC<PaginationProps> = ({ count }) => {
 				</button>
 				<button
 					className="rotate-180 cursor-pointer hover:text-black ml-3 disabled:cursor-not-allowed"
-					disabled={size === count}
+					disabled={endPage === count}
 					onClick={onNext}
 				>
 					<Icon.ArrowLeft />

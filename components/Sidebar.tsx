@@ -58,8 +58,8 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 	];
 
 	return (
-		<div className="flex h-screen">
-			<div className="w-[270px] relative bg-[#F2EAE1] flex flex-col items-center pt-5 pb-8 overflow-y-auto">
+		<div className="flex">
+			<aside className="w-[270px] h-screen sticky top-0 bg-[#F2EAE1] flex flex-col items-center pt-5 pb-8 overflow-y-auto">
 				<div className="flex flex-col items-center">
 					<div className="flex flex-row mb-20">
 						<div className="border-l-4 border-[--secondary] mr-1.5"></div>
@@ -96,7 +96,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 					Logout
 					<Icon.Exit color={"text-black hover:text-[--primary]"} />
 				</div>
-			</div>
+			</aside>
 
 			<MainContent>{children}</MainContent>
 		</div>

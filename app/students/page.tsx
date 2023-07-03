@@ -9,7 +9,7 @@ import useStudents from "@/hooks/useStudents";
 import EmptyState from "@/components/EmptyState";
 import LoadingState from "@/components/LoadingState";
 
-import List from "./components/List";
+import Table from "./components/Table";
 
 interface StudentsProps {
 	searchParams: {
@@ -36,11 +36,6 @@ const Students: React.FC<StudentsProps> = ({ searchParams }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchParams]);
 
-	useEffect(() => {
-		getStudents({});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	const content = useMemo(() => {
 		if (loading) {
 			return <LoadingState />;
@@ -64,7 +59,7 @@ const Students: React.FC<StudentsProps> = ({ searchParams }) => {
 			);
 		}
 
-		return <List students={students} total={total} />;
+		return <Table students={students} total={total} />;
 	}, [loading, searchParams.search, students, total]);
 
 	return (
@@ -75,9 +70,7 @@ const Students: React.FC<StudentsProps> = ({ searchParams }) => {
 				shownSearchInput
 				buttonProps={{ children: "ADD NEW STUDENT", onClick: onAddStudent }}
 			/>
-			<div className="flex flex-1 py-5 px-8 overflow-hidden overflow-y-hidden">
-				{content}
-			</div>
+			<div className="flex flex-1 py-5 px-8">{content}</div>
 		</div>
 	);
 };
