@@ -15,3 +15,7 @@ export const addHTTPToWebsite = (url: string) => {
 
     return url;
 };
+
+export const getAPI_URL = (): string => {
+    return process.env.API_URL || 'http://localhost:3000/';
+};

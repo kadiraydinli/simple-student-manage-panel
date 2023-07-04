@@ -1,42 +1,54 @@
 import { NextResponse } from "next/server";
 
 import { UserType } from "@/types";
-
-const API_URL = process.env.API_URL;
+import { getAPI_URL } from "@/libs/helper";
 
 export async function GET(
     request: Request,
     { params }: { params: { id: string } }
 ) {
-    const id = params.id;
-    const res = await fetch(`${API_URL}/users/${id}`);
-    const data = await res.json();
+    try {
+        const id = params.id;
+        const res = await fetch(`${getAPI_URL}/users/${id}`);
+        const data = await res.json();
 
-    return NextResponse.json(data);
+        return NextResponse.json(data);
+    } catch (error) {
+        console.log(error);
+        return new NextResponse('Internal Error', { status: 500 });
+    }
 };
 
-// TODO: Add validation for params
-
 export async function PUT(request: Request) {
-    const data: UserType = await request.json();
-    const res = await fetch(`${API_URL}/users/${data.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-    })
+    try {
+        const data: UserType = await request.json();
+        const res = await fetch(`${getAPI_URL}/users/${data.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        })
 
-    const resultData = await res.json();
-    return NextResponse.json(resultData);
+        const resultData = await res.json();
+        return NextResponse.json(resultData);
+    } catch (error) {
+        console.log(error);
+        return new NextResponse('Internal Error', { status: 500 });
+    }
 };
 
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
-    const id = params.id;
+    try {
+        const id = params.id;
 
-    const res = await fetch(`${API_URL}/users/${id}`, {
-        method: "DELETE"
-    });
+        const res = await fetch(`${getAPI_URL}/users/${id}`, {
+            method: "DELETE"
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    return NextResponse.json(data);
+        return NextResponse.json(data);
+    } catch (error) {
+        console.log(error);
+        return new NextResponse('Internal Error', { status: 500 });
+    }
 };
