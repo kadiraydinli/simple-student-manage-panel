@@ -23,9 +23,11 @@ const Form: React.FC<FormProps> = ({ student, onSubmit }) => {
 			.required("Required"),
 		email: Yup.string().email("Invalid email address").required("Required"),
 		phone: Yup.number().required("Required"),
-		domain: Yup.string().url().required("Required"),
+		domain: Yup.string()
+			.url("Must start with http:// or https://")
+			.required("Required"),
 		companyName: Yup.string()
-			.max(15, "Must be 15 characters or less")
+			.max(30, "Must be 30 characters or less")
 			.required("Required"),
 	});
 
