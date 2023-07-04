@@ -25,6 +25,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 				<Field
 					type={type}
 					name={name}
+					autoComplete="off"
 					className={twMerge(
 						`
                         flex
