@@ -20,37 +20,37 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 
 	const routes: RouteType[] = [
 		{
-			icon: Icon.Home,
+			icon: <Icon.Home />,
 			label: "Home",
 			active: pathname === "/",
 			href: "/",
 		},
 		{
-			icon: Icon.Bookmark,
+			icon: <Icon.Bookmark viewBox="-6 0 45 35" />,
 			label: "Course",
 			active: pathname === "/course",
 			href: "/course",
 		},
 		{
-			icon: Icon.Cap,
+			icon: <Icon.Cap viewBox="0 0 50 30" />,
 			label: "Students",
 			active: pathname === "/students",
 			href: "/students",
 		},
 		{
-			icon: Icon.Payment,
+			icon: <Icon.Payment viewBox="-5 0 45 50" />,
 			label: "Payment",
 			active: pathname === "/payment",
 			href: "/payment",
 		},
 		{
-			icon: Icon.Report,
+			icon: <Icon.Report />,
 			label: "Report",
 			active: pathname === "/report",
 			href: "/report",
 		},
 		{
-			icon: Icon.Settings,
+			icon: <Icon.Settings />,
 			label: "Settings",
 			active: pathname === "/settings",
 			href: "/settings",
@@ -75,9 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 						/>
 					</div>
-					<div className="font-bold text-base text-black mt-4">
-						Kadir Aydınlı
-					</div>
+					<div className="font-bold text-base text-black mt-4">John Doe</div>
 					<span className="text-[--primary] font-medium text-sm mt-[10px]">
 						Admin
 					</span>

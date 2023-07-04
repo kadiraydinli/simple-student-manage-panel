@@ -8,7 +8,7 @@ import { RouteType } from "@/types";
 interface SidebarItemProps extends RouteType {}
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
-	icon: Icon,
+	icon,
 	label,
 	active,
 	href,
@@ -37,7 +37,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 			)}
 		>
 			<div className="w-[20px] h-[20px] flex justify-center items-center">
-				<Icon />
+				{icon}
 			</div>
 			<p className="font-medium text-sm">{label}</p>
 		</Link>

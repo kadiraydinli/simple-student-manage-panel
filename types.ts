@@ -3,7 +3,7 @@ export const STORAGE_KEY = "AUTH";
 export const PER_PAGE_SIZES = [5, 10, 25, 50];
 
 export type RouteType = {
-    icon: (props: React.SVGAttributes<SVGElement>) => JSX.Element;
+    icon: JSX.Element;
     label: string;
     active: boolean;
     href: string;
