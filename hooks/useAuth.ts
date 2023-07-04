@@ -5,7 +5,7 @@ import { STORAGE_KEY } from "@/types";
 
 const useAuth = () => {
     const pathname = usePathname();
-    const [isLogin, setIsLogin] = useState<boolean | null>(null);
+    const [isLogin, setIsLogin] = useState<boolean | undefined>(undefined);
 
     const onLogin = () => {
         localStorage.setItem(STORAGE_KEY, "true");
