@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAPI_URL } from "@/libs/helper";
 
 export async function GET(request: NextRequest) {
-    const requestUrl = new URL(request.url);
-    const limit = requestUrl.searchParams.get('limit');
-    const search = requestUrl.searchParams.get('search');
-    const skip = requestUrl.searchParams.get('skip');
-
     try {
+        const requestUrl = new URL(request.url);
+        const limit = requestUrl.searchParams.get('limit');
+        const search = requestUrl.searchParams.get('search');
+        const skip = requestUrl.searchParams.get('skip');
+
         let url = `${getAPI_URL}/users`;
 
         if (search) {
