@@ -28,11 +28,13 @@ const Students: React.FC<StudentsProps> = ({ searchParams }) => {
 	};
 
 	useEffect(() => {
-		getStudents({
-			...searchParams,
-			page: parseInt(searchParams.page),
-			size: parseInt(searchParams.size),
-		});
+		if (searchParams.size) {
+			getStudents({
+				...searchParams,
+				page: parseInt(searchParams.page),
+				size: parseInt(searchParams.size),
+			});
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchParams]);
 
